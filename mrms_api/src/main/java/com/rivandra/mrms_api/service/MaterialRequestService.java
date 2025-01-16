@@ -21,12 +21,14 @@ public class MaterialRequestService {
     @Autowired
     private MaterialRequestItemMapper _materialRequestItemMapper;
 
-    public List<MaterialRequest> getManyMaterialRequest(String userId, String status, String dateFrom, String dateTo) {
+    //#region request
+
+    public List<MaterialRequest> getRequests(String userId, String status, String dateFrom, String dateTo) {
         List<MaterialRequest> reqs = _materialRequestMapper.getMany(userId, status, dateFrom, dateTo);
         List<MaterialRequestItem> items = _materialRequestItemMapper.getManyByDate(userId, status, dateFrom, dateTo);
         
         // Group items by requestId
-        Map<String, List<MaterialRequestItem>> itemsByRequestId = items.stream()
+        Map<Integer, List<MaterialRequestItem>> itemsByRequestId = items.stream()
             .collect(Collectors.groupingBy(MaterialRequestItem::getRequestId));
 
         // Populate items in each MaterialRequest
@@ -35,18 +37,38 @@ public class MaterialRequestService {
         return reqs;
     }
 
-    public MaterialRequest getOneMaterialRequest (String userId, String requestId) {
+    public MaterialRequest getRequest (String userId, Integer requestId) {
         MaterialRequest reqObj = _materialRequestMapper.getOne(userId, requestId);
         reqObj.setItems(_materialRequestItemMapper.getManyByRequestId(requestId));
 
         return reqObj;
     }
 
-    public void updateOneMaterialRequest(String userId, MaterialRequest reqObj) {
-        _materialRequestMapper.updateOne(userId, reqObj);
+    public void insertRequest(String userId, MaterialRequest reqObj) {
+        reqObj.setSubmitBy(userId);
+        _materialRequestMapper.insertOne(reqObj);
+
+        for (MaterialRequestItem item : reqObj.getItems()) {
+            item.setRequestId(reqObj.getRequestId());
+            _materialRequestItemMapper.insertOne(item);
+        };
     }
 
-    public void insertOneMaterialRequest(String userId,MaterialRequest reqObj) {
-        _materialRequestMapper.insertOne(userId, reqObj);
+    public void updateRequest(String userId, MaterialRequest reqObj) {
+        Integer requestId = reqObj.getRequestId();
+
+        for (MaterialRequestItem item : reqObj.getItems()) {
+            item.setRequestId(requestId);
+            _materialRequestItemMapper.updateOne(item);
+        };
+
     }
+    
+    public void deleteRequest(String userId, int requestId) {
+        _materialRequestMapper.deleteOne(userId, requestId);
+
+    }
+
+    //#endregion
+
 }

@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class MaterialRequestItem {
-    private String itemId;
-    private String requestId;
+    private Integer itemId;
+    private Integer requestId;
     private String materialName;
-    private int requestedQuantity;
+    private Integer requestedQuantity;
     private String usageDescription;
 }

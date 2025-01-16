@@ -6,8 +6,8 @@ import java.util.List;
 
 @Data
 public class MaterialRequest {
-    private String requestId;
-    private Status status;
+    private Integer requestId;
+    private String status;
     private String submitBy;
     private LocalDateTime submitDate;
     private String approvedBy;
@@ -16,9 +16,4 @@ public class MaterialRequest {
     private LocalDateTime rejectedDate;
     private List<MaterialRequestItem> items; // For manual or nested result mapping
 
-    public enum Status {
-        PENDING_APPROVAL,
-        APPROVED,
-        REJECTED
-    }
 }

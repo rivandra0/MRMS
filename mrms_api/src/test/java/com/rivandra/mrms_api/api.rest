@@ -1,0 +1,62 @@
+GET http://localhost:8080/material-requests?status=ALL&dateFrom=2025-01-01&dateTo=2026-01-01
+
+###
+GET http://localhost:8080/material-request?requestId=2
+
+###
+DELETE http://localhost:8080/material-request?requestId=2
+
+
+###
+POST http://localhost:8080/material-request
+Content-Type: application/json
+
+{
+    "items": [
+        { "materialName": "karung", "requestedQuantity": 50, "usageDescription":" packaging big waste" },
+        { "materialName": "trash bag", "requestedQuantity": 150, "usageDescription":"packaging medium waste" },
+        { "materialName": "plastik", "requestedQuantity": 500, "usageDescription":"packaging small waste" }
+    ]
+}
+
+###
+PUT http://localhost:8080/material-request
+Content-Type: application/json
+
+{
+    "requestId":16,
+    "items": [
+        { "itemId":6, "materialName": "updated karung", "requestedQuantity": 1000, "usageDescription":"updated packaging big waste" },
+        { "itemId":7, "materialName": "updated trash bag", "requestedQuantity": 1000, "usageDescription":"updated packaging medium waste" },
+        { "itemId":8, "materialName": "updated plastik", "requestedQuantity": 1000, "usageDescription":"updated packaging small waste" }
+    ]
+}
+
+
+###############################################
+POST http://localhost:8080/material-request-item
+Content-Type: application/json
+
+{ 
+    "requestId": 16,
+    "materialName": "(v4)material baru", 
+    "requestedQuantity": 777, 
+    "usageDescription":"(v4)material baru desc" 
+}
+
+
+###
+PUT http://localhost:8080/material-request-item
+Content-Type: application/json
+
+{ 
+    "requestId": 16,
+    "itemId":9, 
+    "materialName": "berubah", 
+    "requestedQuantity": 1200, 
+    "usageDescription":"seharusnya aman" 
+}
+
+
+###
+DELETE http://localhost:8080/material-request-item?requestId=16&itemId=10
