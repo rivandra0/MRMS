@@ -46,9 +46,14 @@ public interface MaterialRequestItemMapper {
     @Update("""
         update material_request_items 
         set material_name = #{ matReqItem.materialName }, requested_quantity=#{ matReqItem.requestedQuantity }, usage_description=#{ matReqItem.usageDescription } 
-        where request_id= #{ matReqItem.requestId } and item_id= #{ matReqItem.itemId}
+        where   
+            request_id= #{ matReqItem.requestId } and item_id= #{ matReqItem.itemId} 
+            and (
+                exists (select * from material_requests where submit_by=#{userId} and request_id=#{ matReqItem.requestId })
+                or #{userId}='ALL'
+            )
     """)
-    void updateOne(@Param("matReqItem") MaterialRequestItem matReqItem);
+    void updateOne(@Param("userId") String userId, @Param("matReqItem") MaterialRequestItem matReqItem);
 
     @Insert("""
         INSERT INTO material_request_items (request_id, material_name, requested_quantity, usage_description)

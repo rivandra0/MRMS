@@ -20,7 +20,7 @@ public class MaterialRequestItemService {
         _materialRequestItemMapper.insertOne(reqObj);
     }
     public void updateRequestItem(String userId, MaterialRequestItem reqObj) {
-        _materialRequestItemMapper.updateOne(reqObj);
+        _materialRequestItemMapper.updateOne(userId, reqObj);
     }
     public void deleteRequestItem(String userId, Integer requestId, Integer itemId ) {
         _materialRequestItemMapper.deleteOne(userId, requestId, itemId);

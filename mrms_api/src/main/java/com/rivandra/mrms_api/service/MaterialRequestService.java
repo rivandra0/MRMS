@@ -59,7 +59,7 @@ public class MaterialRequestService {
 
         for (MaterialRequestItem item : reqObj.getItems()) {
             item.setRequestId(requestId);
-            _materialRequestItemMapper.updateOne(item);
+            _materialRequestItemMapper.updateOne(userId, item);
         };
 
     }
