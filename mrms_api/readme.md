@@ -1,5 +1,7 @@
 # INSTALLATION GUIDE
 
+by Muhamamd Rivandra
+
 ## Backend
 
 **Spring Boot 3**
