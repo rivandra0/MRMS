@@ -89,6 +89,11 @@ public class JwtService {
                 }
             }
         }
+
+        final String authHeader = request.getHeader("Authorization");
+        if(authHeader != null) {
+            return authHeader.substring(7);
+        } 
         return null;
     }
 

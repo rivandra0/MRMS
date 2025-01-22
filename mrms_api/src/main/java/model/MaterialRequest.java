@@ -15,5 +15,5 @@ public class MaterialRequest {
     private String rejectedBy;
     private LocalDateTime rejectedDate;
     private List<MaterialRequestItem> items; // For manual or nested result mapping
-
+    private String remark;
 }

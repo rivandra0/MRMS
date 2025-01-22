@@ -1,9 +1,8 @@
 ###
 
 GET http://localhost:8080/user/material-requests?status=ALL&dateFrom=2025-01-01&dateTo=2026-01-01
-Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUFJPRFVDVElPTl9VU0VSIiwidXNlcklkIjoiUFJPRFVDVElPTl9VU0VSIiwiZW1haWwiOiJwcm9kdWN0aW9uQGNvbXBhbnkuY29tIiwic3ViIjoicHJkMSIsImlhdCI6MTczNzI0OTgwNiwiZXhwIjoxNzM3MjUxNjA2fQ._uolW31MUlEt2iKgUq-uOsaPst6fS0xRT_kU1IhAYh8; Max-Age=604800; Expires=Sun, 26 Jan 2025 01:23:26 GMT; Path=/; Secure; HttpOnly
-###
-
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUFJPRFVDVElPTl9VU0VSIiwidXNlcklkIjoiUFJPRFVDVElPTl9VU0VSIiwiZW1haWwiOiJwcm9kdWN0aW9uQGNvbXBhbnkuY29tIiwic3ViIjoicHJkMSIsImlhdCI6MTczNzQ2MjIyMywiZXhwIjoxNzM3NDY0MDIzfQ.H_rLJAkO-3Sbv-mr4f4FhKNGbO8mbZCitsjMpPih30k
+ 
 GET http://localhost:8080/admin/material-requests?status=ALL&dateFrom=2025-01-01&dateTo=2026-01-01
 Cookie: jwtToken=eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiV0FSRUhPVVNFX0FETUlOIiwidXNlcklkIjoiV0FSRUhPVVNFX0FETUlOIiwiZW1haWwiOiJ3YXJlaG91c2VAY29tcGFueS5jb20iLCJzdWIiOiJ3aDEiLCJpYXQiOjE3MzcxNzI0NDgsImV4cCI6MTczNzE3NDI0OH0.KspThtb0tltjCxy4J___el4rgh9_bjCPkRzEExA-DFg; Max-Age=604800; Expires=Sat, 25 Jan 2025 03:54:08 GMT; Path=/; Secure; HttpOnly
 

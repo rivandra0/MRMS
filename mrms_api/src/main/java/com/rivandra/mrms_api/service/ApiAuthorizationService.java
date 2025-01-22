@@ -13,23 +13,19 @@ public class ApiAuthorizationService {
     public ApiAuthorizationService() {
         roleEndpointMappings.add(new String[] {"GET", "/admin/material-requests", "WAREHOUSE_ADMIN"});
         roleEndpointMappings.add(new String[] {"GET", "/user/material-requests", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"GET", "/admin/material-request", "WAREHOUSE_ADMIN"});
         roleEndpointMappings.add(new String[] {"GET", "/user/material-request", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"POST", "/user/material-request", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"PUT", "/admin/material-request", "WAREHOUSE_ADMIN"});
         roleEndpointMappings.add(new String[] {"PUT", "/user/material-request", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"DELETE", "/user/material-request", "PRODUCTION_USER"});
+        roleEndpointMappings.add(new String[] {"GET", "/admin/material-request/approve", "WAREHOUSE_ADMIN"});
+        roleEndpointMappings.add(new String[] {"GET", "/admin/material-request/reject", "WAREHOUSE_ADMIN"});
 
-        
+
         roleEndpointMappings.add(new String[] {"POST", "/user/material-request-item", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"PUT", "/admin/material-request-item", "WAREHOUSE_ADMIN"});
         roleEndpointMappings.add(new String[] {"PUT", "/user/material-request-item", "PRODUCTION_USER"});
-
         roleEndpointMappings.add(new String[] {"DELETE", "/user/material-request-item", "PRODUCTION_USER"});
     }
 

@@ -9,12 +9,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
-
 
 @RestController
 public class MaterialRequestItemController {
@@ -27,37 +27,73 @@ public class MaterialRequestItemController {
 
 
     @PostMapping("/user/material-request-item")
-    public String insertRequestItem(@RequestBody MaterialRequestItem matReqItem, HttpServletRequest request) {
-        String userId = _jwtService.extractClaimSubject(request);
+    public CommonDTO insertRequestItem(@RequestBody MaterialRequestItem matReqItem, HttpServletRequest request) {
+        try {
+            String userId = _jwtService.extractClaimSubject(request);
 
-        _materialRequestItemService.insertRequestItem(userId, matReqItem);
-
-        return "successfully insert item";
+            _materialRequestItemService.insertRequestItem(userId, matReqItem);
+    
+            CommonDTO dto = new CommonDTO();
+            dto.setMessage("successfully insert item");
+            dto.setStatus("success");
+            return dto;
+        }
+        catch(Throwable ex) {
+            throw ex;
+        }
+        
     }
 
     @PutMapping("/admin/material-request-item")
-    public String updateRequestItemForUser(@RequestBody MaterialRequestItem matReqItem) {
-        _materialRequestItemService.updateRequestItem("ALL", matReqItem);
+    public CommonDTO updateRequestItemForAdmin(@RequestBody MaterialRequestItem matReqItem) {
+        try {
+            _materialRequestItemService.updateRequestItem("ALL", matReqItem);
 
-        return "successfully update item";
+            CommonDTO dto = new CommonDTO();
+            dto.setMessage("successfully update item");
+            dto.setStatus("success");
+            return dto;
+            
+        } catch(Throwable ex) {
+            throw ex;
+        }
+        
     }
 
     @PutMapping("/user/material-request-item")
-    public String updateRequestItemForAdmin(@RequestBody MaterialRequestItem matReqItem, HttpServletRequest request) {
-        String userId = _jwtService.extractClaimSubject(request);
+    public CommonDTO updateRequestItemForUser(@RequestBody MaterialRequestItem matReqItem, HttpServletRequest request) {
+        try{
+            String userId = _jwtService.extractClaimSubject(request);
 
-        _materialRequestItemService.updateRequestItem(userId, matReqItem);
+            _materialRequestItemService.updateRequestItem(userId, matReqItem);
+    
+            CommonDTO dto = new CommonDTO();
+            dto.setMessage("successfully update item");
+            dto.setStatus("success");
+            return dto;
+        }
+        catch(Throwable ex) {
+            throw ex;
+        }
 
-        return "successfully update item";
     }    
 
     @DeleteMapping("/user/material-request-item")
-    public String deleteRequestItem(@RequestParam String requestId, String itemId, HttpServletRequest request) {
-        String userId = _jwtService.extractClaimSubject(request);
+    public CommonDTO deleteRequestItem(@RequestParam String requestId, String itemId, HttpServletRequest request) {
+        try{
+            String userId = _jwtService.extractClaimSubject(request);
 
-        _materialRequestItemService.deleteRequestItem(userId, Integer.parseInt(requestId), Integer.parseInt(itemId));
-
-        return "successfully delete item";
+            _materialRequestItemService.deleteRequestItem(userId, Integer.parseInt(requestId), Integer.parseInt(itemId));
+            
+            CommonDTO dto = new CommonDTO();
+            dto.setMessage("successfully delete item");
+            dto.setStatus("success");
+            return dto;
+        }
+        catch(Throwable ex) {
+            throw ex;
+        }
+        
     }
     
 }

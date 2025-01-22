@@ -16,6 +16,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -35,7 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request, @SuppressWarnings("null") HttpServletResponse response, @SuppressWarnings("null") FilterChain filterChain)
             throws ServletException, IOException {
 
-        String[] whiteList = new String[]{"/auth/login", "/auth/register"};
+        String[] whiteList = new String[]{"/auth/login"};
         String requestPath = request.getRequestURI();
 
         boolean isWhiteListed = Arrays.stream(whiteList).anyMatch(requestPath::equals);
@@ -44,11 +46,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
+        Enumeration<String> headers = request.getHeaderNames();
         final String authHeader = request.getHeader("Authorization");
         final String jwtFromCookie = getJwtToken(request);
 
         String jwtTokenStr = null;
-        if (authHeader != null && !authHeader.startsWith("Bearer ")) {
+        if (authHeader != null && !authHeader.startsWith("bearer ")) {
            jwtTokenStr = authHeader.substring(7);
         } 
         if (jwtFromCookie != null) {

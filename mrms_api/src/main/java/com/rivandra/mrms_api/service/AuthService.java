@@ -12,17 +12,15 @@ public class AuthService {
     @Autowired
     private UserMapper _userMapper;
 
-    @Autowired
-    private JwtService _jwtService;
 
-    public String login(String userId, String password) {
+    public User login(String userId, String password) {
         
         User usr = _userMapper.getOneWithPassword(userId, password);
 
         if(usr == null) {
             throw new RuntimeException("user not found");
         }
-        return _jwtService.generateToken(usr);
+        return usr;
 
     }
 

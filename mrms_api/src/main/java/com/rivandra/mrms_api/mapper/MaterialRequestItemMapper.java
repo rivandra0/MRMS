@@ -14,7 +14,7 @@ public interface MaterialRequestItemMapper {
             material_name as materialName, 
             requested_quantity as requestedQuantity, 
             usage_description as usageDescription
-        from material_request_items where request_id=#{requestId};
+        from material_request_items where request_id=#{requestId} order by item_id asc;
     """)
     List<MaterialRequestItem> getManyByRequestId(@Param("requestId") Integer requestId);
 

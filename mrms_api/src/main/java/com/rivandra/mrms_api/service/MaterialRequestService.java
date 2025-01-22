@@ -33,7 +33,6 @@ public class MaterialRequestService {
 
         // Populate items in each MaterialRequest
         reqs.forEach(req -> req.setItems(itemsByRequestId.getOrDefault(req.getRequestId(), Collections.emptyList())));
-
         return reqs;
     }
 
@@ -44,7 +43,7 @@ public class MaterialRequestService {
         return reqObj;
     }
 
-    public void insertRequest(String userId, MaterialRequest reqObj) {
+    public MaterialRequest insertRequest(String userId, MaterialRequest reqObj) {
         reqObj.setSubmitBy(userId);
         _materialRequestMapper.insertOne(reqObj);
 
@@ -52,6 +51,8 @@ public class MaterialRequestService {
             item.setRequestId(reqObj.getRequestId());
             _materialRequestItemMapper.insertOne(item);
         };
+
+        return reqObj;
     }
 
     public void updateRequest(String userId, MaterialRequest reqObj) {
@@ -64,6 +65,25 @@ public class MaterialRequestService {
 
     }
     
+    public void approveRequest(String userId, Integer requestId) {
+        _materialRequestMapper.approveOne(userId, requestId);
+    }
+
+    public void rejectRequest(String userId, Integer requestId, String remark) {
+        _materialRequestMapper.rejectOne(userId, requestId, remark);
+    }
+    
+    public void rejectRequest(String userId, MaterialRequest reqObj) {
+        Integer requestId = reqObj.getRequestId();
+
+        for (MaterialRequestItem item : reqObj.getItems()) {
+            item.setRequestId(requestId);
+            _materialRequestItemMapper.updateOne(userId, item);
+        };
+
+    }
+    
+
     public void deleteRequest(String userId, int requestId) {
         _materialRequestMapper.deleteOne(userId, requestId);
 
