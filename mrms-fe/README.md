@@ -17,12 +17,12 @@ we can change the api path here
 
 ### install dependencies with npm
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
 ### run application
 
 ```bash
-    npm run dev
+npm run dev
 ```
